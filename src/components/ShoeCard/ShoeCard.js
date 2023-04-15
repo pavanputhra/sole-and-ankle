@@ -13,6 +13,7 @@ const ShoeCard = ({
   salePrice,
   releaseDate,
   numOfColors,
+    className,
 }) => {
   // There are 3 variants possible, based on the props:
   //   - new-release
@@ -32,11 +33,18 @@ const ShoeCard = ({
       : 'default'
 
   return (
-    <Link href={`/shoe/${slug}`}>
+    <Link href={`/shoe/${slug}`} className={className}>
       <Wrapper>
         <ImageWrapper>
           <Image alt="" src={imageSrc} />
         </ImageWrapper>
+
+        {variant == "on-sale" &&
+            <SaleFlag>Sale</SaleFlag>
+        }
+        {variant == "new-release" &&
+            <NewReleaseFlag>Just Released!</NewReleaseFlag>
+        }
         <Spacer size={12} />
         <Row>
           <Name>{name}</Name>
@@ -50,18 +58,46 @@ const ShoeCard = ({
   );
 };
 
+
+
+const Flag = styled.div`
+  position: absolute;
+  background-color: ${COLORS.secondary};
+  padding: 7px 11px;
+  color: ${COLORS.white};
+  font-weight: 700;
+  font-size: (14/16)rem;
+  top: 12px;
+  right: -4px;
+  border-radius: 2px;
+`;
+
+const NewReleaseFlag = styled(Flag)`
+
+`;
+
+const SaleFlag = styled(Flag)`
+  background-color: ${COLORS.primary};
+`;
+
 const Link = styled.a`
   text-decoration: none;
   color: inherit;
 `;
 
-const Wrapper = styled.article``;
-
-const ImageWrapper = styled.div`
+const Wrapper = styled.article`
   position: relative;
 `;
 
-const Image = styled.img``;
+const ImageWrapper = styled.div`
+  position: relative;
+  border-radius: 16px 16px 4px 4px;
+  overflow: clip;
+`;
+
+const Image = styled.img`
+  width: 100%;
+`;
 
 const Row = styled.div`
   font-size: 1rem;

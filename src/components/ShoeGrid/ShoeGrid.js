@@ -8,12 +8,20 @@ const ShoeGrid = () => {
   return (
     <Wrapper>
       {SHOES.map((shoe) => (
-        <ShoeCard key={shoe.slug} {...shoe} />
+        <ShoeCardStyled key={shoe.slug} {...shoe} />
       ))}
     </Wrapper>
   );
 };
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 36px;
+`;
+
+const ShoeCardStyled = styled(ShoeCard)`
+  flex: 1 1 340px;
+`;
 
 export default ShoeGrid;
